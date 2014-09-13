@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: soundbox_production
-  username: soundbox
+  #username: soundbox
   password: <%= ENV['SOUNDBOX_DATABASE_PASSWORD'] %>
