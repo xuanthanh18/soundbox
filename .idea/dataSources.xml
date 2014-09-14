@@ -5,18 +5,23 @@
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql:soundbox_development</jdbc-url>
+      <user-name>postgres</user-name>
+      <user-password>dfc6dfc3dfc4dfc2dfdedfc3dfc4dfc2</user-password>
       <libraries />
     </data-source>
     <data-source source="LOCAL" name="Rails soundbox: test" uuid="01f8199d-a941-422c-a617-acf49b7a1466">
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql:soundbox_test</jdbc-url>
+      <user-name>postgres</user-name>
+      <user-password>dfc6dfc3dfc4dfc2dfdedfc3dfc4dfc2</user-password>
       <libraries />
     </data-source>
     <data-source source="LOCAL" name="Rails soundbox: production" uuid="30774d8f-7db9-4115-8612-de44e319d84a">
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql:soundbox_production</jdbc-url>
+      <user-name>postgres</user-name>
       <user-password>df96df8fdf97df8adfefdfe4dffcdff1df8ddff9dfe5dfffdfe4dfeedfe8dfe5dff2dff5dfeedfebdffedfebdfe8dfebdff9dfefdff5dffadfebdff9dff9dffddfe5dff8dfeedf8ddff7df8adf8fdf94</user-password>
       <libraries />
     </data-source>
