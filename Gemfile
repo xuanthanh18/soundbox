@@ -43,3 +43,7 @@ group :production do
   gem 'rails_12factor', '0.0.2'
   gem 'unicorn',        '4.8.3'
 end
+
+gem 'faker',          '1.4.2'
+gem 'will_paginate',           '3.0.7'
+gem 'bootstrap-will_paginate', '0.0.10'
