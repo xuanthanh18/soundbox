@@ -1,26 +1,14 @@
 Rails.application.routes.draw do
-  get 'password_resets/new'
-
-  get 'password_resets/edit'
-
-  get 'account_activations/edit'
-
-  get 'sessions/new'
-
-  get 'users/new'
-
-  root             'static_pages#home'
-  get 'help'    => 'static_pages#help'
-  get 'about'   => 'static_pages#about'
-  get 'contact' => 'static_pages#contact'
-  get 'signup'  => 'users#new'
+  root                 'static_pages#home'
+  get    'help'     => 'static_pages#help'
+  get    'about'    => 'static_pages#about'
+  get    'contact'  => 'static_pages#contact'
+  get    'signup'   => 'users#new'
   get    'login'    => 'sessions#new'
   delete 'logout'   => 'sessions#destroy'
-
-  resources :microposts
-
+  delete 'close'    => 'sessions#end_session' if Rails.env.test?
   resources :users
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions,            only: [:new, :create, :destroy]
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
 
