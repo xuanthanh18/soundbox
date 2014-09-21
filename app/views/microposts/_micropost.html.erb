@@ -1,12 +1,29 @@
+
 <li id="micropost-<%= micropost.id %>">
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
   <span class="content">
     <%= micropost.content %>
     <%= image_tag micropost.picture.url if micropost.picture?%>
+
+    <% if has_audio?(micropost) %>
+        <!--
+        <div id="wrapper">
+          <div id="fileWrapper" class="file_wrapper">
+            <div id="info">
+            </div>
+            <label for="uploadedFile"></label>
+            <input type="file" id="uploadedFile"></input>
+          </div>
+          <div id="visualizer_wrapper">
+            <canvas id='canvas' width="800" height="100"></canvas>
+          </div>
+        </div>
+    -->
     <audio controls>
-     <source src="<%= micropost.picture.url if micropost.picture?%>" type="audio/mpeg">
+      <source src="<%= micropost.audio.url if micropost.audio?%>" type="audio/mpeg">
     </audio>
+    <% end %>
 
   </span>
   <span class="timestamp">

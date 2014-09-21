@@ -1,12 +1,23 @@
 <%= form_for(@micropost, html: { multipart: true }) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
     <div class="field">
-      <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+      <%= f.text_area :content, placeholder: "Compose new post..." %>
     </div>
-    <%= f.submit "Post", class: "btn btn-primary" %>
-    <span class="picture">
+    Select a picture
+  <span class="picture">
     <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
   </span>
+
+    Select an audio file
+  <span class="audio">
+    <%= f.file_field :audio, accept: 'audio/mpeg' %>
+  </span>
+
+    Record your own (not yet working)
+  <span class="audio">
+    <%= f.file_field :record, accept: 'audio/mpeg' %>
+  </span>
+    <%= f.submit "Post", class: "btn btn-primary" %>
 
 <% end %>
 
