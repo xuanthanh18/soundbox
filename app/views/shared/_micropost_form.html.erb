@@ -15,17 +15,6 @@
   </span>
 
     Record your own
-    <div id="wrapper">
-      <div>
-        <a href="javascript:record()"  id="record" >Record</a>
-        <a href="javascript:play()"    id="play"   >Play</a>
-        <a href="javascript:stop()"    id="stop"   >Stop</a>
-        <a href="javascript:upload()"  id="upload" >Upload (faked)</a>
-      </div>
-<!-- get audio data here -->
-      <span id="time">0:00</span>
-      <span id="data">data</span>
-    </div>
 
     <%= f.submit "Post", class: "btn btn-primary" %>
 
@@ -38,11 +27,6 @@
         if (size_in_megabytes > 2) {
             alert('Maximum file size is 5MB. Please choose a smaller file.');
         }
-    });
-
-
-    Recorder.initialize({
-        swfSrc: "recorder.swf"
     });
 
 </script>
