@@ -3,6 +3,7 @@
     <div class="field">
       <%= f.text_area :content, placeholder: "Compose new post..." %>
     </div>
+
     Select a picture
   <span class="picture">
     <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
@@ -13,19 +14,35 @@
     <%= f.file_field :audio, accept: 'audio/mpeg' %>
   </span>
 
-    Record your own (not yet working)
-  <span class="audio">
-    <%= f.file_field :record, accept: 'audio/mpeg' %>
-  </span>
+    Record your own
+    <div id="wrapper">
+      <div>
+        <a href="javascript:record()"  id="record" >Record</a>
+        <a href="javascript:play()"    id="play"   >Play</a>
+        <a href="javascript:stop()"    id="stop"   >Stop</a>
+        <a href="javascript:upload()"  id="upload" >Upload (faked)</a>
+      </div>
+<!-- get audio data here -->
+      <span id="time">0:00</span>
+      <span id="data">data</span>
+    </div>
+
     <%= f.submit "Post", class: "btn btn-primary" %>
 
 <% end %>
 
 <script type="text/javascript">
+
     $('#micropost_picture').bind('change', function() {
         size_in_megabytes = this.files[0].size/1024/1024;
         if (size_in_megabytes > 2) {
             alert('Maximum file size is 5MB. Please choose a smaller file.');
         }
     });
+
+
+    Recorder.initialize({
+        swfSrc: "recorder.swf"
+    });
+
 </script>
