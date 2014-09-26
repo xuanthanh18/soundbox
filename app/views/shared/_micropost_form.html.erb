@@ -13,7 +13,7 @@
   <span class="audio">
     <%= f.file_field :audio, accept: 'audio/mpeg' %>
   </span>
-
+<!--
     Record your own
     <div id="wrapper">
       <div>
@@ -25,8 +25,8 @@
 
       <span id="url">0:00</span>
     </div>
-
-    <h1>Record to MP3 Test</h1>
+-->
+    Record your own voice
 
     <button onclick="startRecording(this);">record</button>
     <button onclick="stopRecording(this);" disabled>stop</button>
@@ -34,9 +34,7 @@
     <h2>Recordings</h2>
     <ul id="recordingslist"></ul>
 
-    <h2>Log</h2>
-    <pre id="log"></pre>
-
+    <pre hidden="true" id="log"></pre>
 
     <%= f.submit "Post", class: "btn btn-primary" %>
 
