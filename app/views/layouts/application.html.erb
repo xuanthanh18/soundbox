@@ -8,7 +8,8 @@
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
 </head>
-<body>
+<body onload="setupRecorder()">
+<div class="allbody">
 <%= render 'layouts/header' %>
 <div class="container">
   <% flash.each do |message_type, message| %>
@@ -17,6 +18,7 @@
   <%= yield %>
   <%= render 'layouts/footer' %>
   <%= debug(params) if Rails.env.development? %>
+</div>
 </div>
 </body>
 </html>

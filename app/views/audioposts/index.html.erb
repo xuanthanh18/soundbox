@@ -1,0 +1,23 @@
+<h1>Listing audioposts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @audioposts.each do |audiopost| %>
+      <tr>
+        <td><%= link_to 'Show', audiopost %></td>
+        <td><%= link_to 'Edit', edit_audiopost_path(audiopost) %></td>
+        <td><%= link_to 'Destroy', audiopost, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Audiopost', new_audiopost_path %>

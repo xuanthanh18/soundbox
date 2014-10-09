@@ -17,16 +17,126 @@
       </div>
     </div>
 <% else %>
-<div class="center jumbotron">
-  <h1>Welcome to SoundBox</h1>
+<div class="center">
+  <div id="wami" style="margin-left: 100px;"></div>
+  <noscript>WAMI requires Javascript</noscript>
 
-  <h2>
-    This is the home page for the
-    <a href="http://www.linhtinh.com/"> Soundbox</a>
-    application.
-  </h2>
 
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
-</div>
+  <%= form_for(@audiopost, html: { multipart: true }) do |f| %>
+      <ul id="recordingslist"></ul>
+      <button id="recordbtn" class="round-button" onclick="startRecording(this);"> RECORD </button>
+      <button id="pausebtn" class="round-button" onclick="stopRecording(this);" disabled>PAUSE</button>
+      <%= f.submit "FINISHED?", class: "round-button1" %>
+        <br>
+      Create your own unique sound today!
+
+
+      <pre hidden="true" id="log"></pre>
+
+
+
+<% end %>
+
+  <script type="text/javascript">
+
+      $('#micropost_picture').bind('change', function() {
+          size_in_megabytes = this.files[0].size/1024/1024;
+          if (size_in_megabytes > 2) {
+              alert('Maximum file size is 5MB. Please choose a smaller file.');
+          }
+      });
+
+      function upload(){
+          document.getElementById("micropost_audio").value = "/Users/tempadmin/Downloads/horse.mp3";
+          document.getElementById("url").innerHTML = document.getElementById("micropost_audio").value;
+      }
+
+
+      function __log(e, data) {
+          log.innerHTML += "\n" + e + " " + (data || '');
+      }
+
+      var audio_context;
+      var recorder;
+
+      function startUserMedia(stream) {
+          var input = audio_context.createMediaStreamSource(stream);
+          __log('Media stream created.' );
+          __log("input sample rate " +input.context.sampleRate);
+
+          input.connect(audio_context.destination);
+          __log('Input connected to audio context destination.');
+
+          recorder = new Recorder(input);
+          __log('Recorder initialised.');
+      }
+
+      function startRecording(button) {
+          recorder && recorder.record();
+          button.disabled = true;
+          button.nextElementSibling.disabled = false;
+          __log('Recording...');
+      }
+
+      function stopRecording(button) {
+          recorder && recorder.stop();
+          button.disabled = true;
+          button.previousElementSibling.disabled = false;
+          __log('Stopped recording.');
+
+          // create WAV download link using audio data blob
+          createDownloadLink();
+
+          recorder.clear();
+      }
+
+      function createDownloadLink() {
+          recorder && recorder.exportWAV(function(blob) {});
+      }
+
+      window.onload = function init() {
+          /*try {
+              // webkit shim
+              window.AudioContext = window.AudioContext || window.webkitAudioContext;
+              navigator.getUserMedia = ( navigator.getUserMedia ||
+                      navigator.webkitGetUserMedia ||
+                      navigator.mozGetUserMedia ||
+                      navigator.msGetUserMedia);
+              window.URL = window.URL || window.webkitURL;
+
+              audio_context = new AudioContext;
+              __log('Audio context set up.');
+              __log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
+          } catch (e) {
+              alert('No web audio support in this browser!');
+          }
+
+          navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
+              __log('No live audio input: ' + e);
+          });*/
+
+                };
+
+  </script>
+
+  <script>
+      function setupRecorder() {
+          Wami.setup({
+              id : "wami",
+              onReady : setupGUI
+          });
+      }
+
+      function setupGUI() {
+          var gui = new Wami.GUI({
+              id : "wami",
+              recordUrl : "https://wami-recorder.appspot.com/audio",
+              playUrl : "https://wami-recorder.appspot.com/audio"
+          });
+
+          gui.setPlayEnabled(false);
+      }
+  </script>
+
 
 <% end %>
