@@ -17,6 +17,7 @@ gem 'jquery-rails',            '3.1.1'
 gem 'turbolinks',              '2.2.2'
 gem 'jbuilder',                '2.1.3'
 gem 'sdoc',                    '0.4.0', group: :doc
+gem 'omniauth-facebook',       '~> 1.4.1'
 
 group :test do
   gem 'minitest-reporters', '1.0.5'

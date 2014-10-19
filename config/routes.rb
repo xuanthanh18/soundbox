@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get    'login'    => 'sessions#new'
   delete 'logout'   => 'sessions#destroy'
   delete 'close'    => 'sessions#end_session' if Rails.env.test?
+
   resources :users do
     member do
       get :following, :followers

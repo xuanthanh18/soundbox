@@ -1,4 +1,8 @@
 <% if logged_in? %>
+    <script>
+        document.body.style.backgroundImage='none';
+    </script>
+
     <div class="row">
       <aside class="col-md-4">
         <section class="user_info">
@@ -17,126 +21,183 @@
       </div>
     </div>
 <% else %>
-<div class="center">
-  <div id="wami" style="margin-left: 100px;"></div>
-  <noscript>WAMI requires Javascript</noscript>
+    <div id="homepagediv">
+        <div id="logindiv">
+          <text1> Create your very own sound channel</text1><br>
+          <a id="modal_trigger" href="#modal"><button class="btn-large btn-primary"> Login </button></a>
+
+          <!-- = link_to "Login", login_path, class: "btn btn-large btn-primary" %> -->
+
+          <h3>
+            Or <%= link_to "Sign up", signup_path %>
+          </h3>
+        </div>
+
+      <div id="modal" class="popupContainer" style="display:none;">
+        <header class="popupHeader">
+          <span class="header_title">Login</span>
+          <span class="modal_close"><i class="fa fa-times"></i></span>
+        </header>
+
+        <section class="popupBody">
+          <!-- Social Login -->
+          <div class="social_login">
+            <div class="">
+              <a href="#" class="social_box fb">
+                <span class="icon"><i class="fa fa-facebook"></i></span>
+                <span class="icon_title">Signin with Facebook</span>
+
+              </a>
+
+              <a href="#" class="social_box google">
+                <span class="icon"><i class="fa fa-google-plus"></i></span>
+                <span class="icon_title">Signin with Google</span>
+              </a>
+            </div>
+
+            <div class="centeredText">
+              <span>Or use your Email address</span>
+            </div>
+
+            <div class="action_btns">
+              <div class="one_half"><a href="#" id="login_form" class="btn">Login</a></div>
+              <div class="one_half last"><a href="#" id="register_form" class="btn">Sign up</a></div>
+            </div>
+          </div>
+
+          <!-- Username & Password Login form -->
+          <div class="user_login">
+            <%= form_for(:session, url: sessions_path) do |f| %>
+
+                <%= f.label :email %>
+                <%= f.text_field :email %>
+
+                <%= f.label :password %>
+                <%= link_to "(forgot password)", new_password_reset_path %>
+
+                <%= f.password_field :password %>
+                <%= f.label :remember_me, class: "checkbox inline" do %>
+                    <%= f.check_box :remember_me %>
+                    <span>Remember me on this computer</span>
+                <% end %>
+                <div class="action_btns">
+                    <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                    <div class="one_half last"><%= f.submit "Log in", class: "btn btn-red" %></div>
+                </div>
+            <% end %>
+            <!--
+            <form>
+              <label>Email / Username</label>
+              <input type="text" />
+              <br />
+
+              <label>Password</label>
+              <input type="password" />
+              <br />
+
+              <div class="checkbox">
+                <input id="remember" type="checkbox" />
+                <label for="remember">Remember me on this computer</label>
+              </div>
+
+              <div class="action_btns">
+                <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                <div class="one_half last"><a href="#" class="btn btn_red">Login</a></div>
+              </div>
+            </form>
+             -->
+          </div>
+
+          <!-- Register Form -->
+          <div class="user_register">
+
+            <%= form_for(:user, url: users_path) do |f| %>
+                <!-- = render 'shared/error_messages', object: f.object %> -->
+
+                <%= f.label :name %>
+                <%= f.text_field :name, class: 'form-control' %>
+
+                <%= f.label :email %>
+                <%= f.text_field :email, class: 'form-control' %>
+
+                <%= f.label :password %>
+                <%= f.password_field :password, class: 'form-control' %>
+
+                <%= f.label :password_confirmation, "Confirmation" %>
+                <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+                <div class="action_btns">
+                  <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                  <div class="one_half last"><%= f.submit "Register", class: "btn btn-primary" %></div>
+                </div>
+            <% end %>
+            <!--
+            <form>
+              <label>Full Name</label>
+              <input type="text" />
+              <br />
+
+              <label>Email Address</label>
+              <input type="email" />
+              <br />
+
+              <label>Password</label>
+              <input type="password" />
+              <br />
+
+              <div class="checkbox">
+                <input id="send_updates" type="checkbox" />
+                <label for="send_updates">Send me occasional email updates</label>
+              </div>
+
+              <div class="action_btns">
+                <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                <div class="one_half last"><a href="#" class="btn btn_red">Register</a></div>
+              </div>
+            </form>
+            -->
+          </div>
+        </section>
+      </div>
+
+      <script type="text/javascript">
+          $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+          $(function(){
+              // Calling Login Form
+              $("#login_form").click(function(){
+                  $(".social_login").hide();
+                  $(".user_login").show();
+                  return false;
+              });
+
+              // Calling Register Form
+              $("#register_form").click(function(){
+                  $(".social_login").hide();
+                  $(".user_register").show();
+                  $(".header_title").text('Register');
+                  return false;
+              });
+
+              // Going back to Social Forms
+              $(".back_btn").click(function(){
+                  $(".user_login").hide();
+                  $(".user_register").hide();
+                  $(".social_login").show();
+                  $(".header_title").text('Login');
+                  return false;
+              });
+          })
+      </script>
 
 
-  <%= form_for(@audiopost, html: { multipart: true }) do |f| %>
-      <ul id="recordingslist"></ul>
-      <button id="recordbtn" class="round-button" onclick="startRecording(this);"> RECORD </button>
-      <button id="pausebtn" class="round-button" onclick="stopRecording(this);" disabled>PAUSE</button>
-      <%= f.submit "FINISHED?", class: "round-button1" %>
-        <br>
-      Create your own unique sound today!
+      <!--
+              <div id="listen_container">
+                <p align="center"> Most listened channels of the week</p>
+                <div id="most_listened">
 
-
-      <pre hidden="true" id="log"></pre>
-
-
-
-<% end %>
-
-  <script type="text/javascript">
-
-      $('#micropost_picture').bind('change', function() {
-          size_in_megabytes = this.files[0].size/1024/1024;
-          if (size_in_megabytes > 2) {
-              alert('Maximum file size is 5MB. Please choose a smaller file.');
-          }
-      });
-
-      function upload(){
-          document.getElementById("micropost_audio").value = "/Users/tempadmin/Downloads/horse.mp3";
-          document.getElementById("url").innerHTML = document.getElementById("micropost_audio").value;
-      }
-
-
-      function __log(e, data) {
-          log.innerHTML += "\n" + e + " " + (data || '');
-      }
-
-      var audio_context;
-      var recorder;
-
-      function startUserMedia(stream) {
-          var input = audio_context.createMediaStreamSource(stream);
-          __log('Media stream created.' );
-          __log("input sample rate " +input.context.sampleRate);
-
-          input.connect(audio_context.destination);
-          __log('Input connected to audio context destination.');
-
-          recorder = new Recorder(input);
-          __log('Recorder initialised.');
-      }
-
-      function startRecording(button) {
-          recorder && recorder.record();
-          button.disabled = true;
-          button.nextElementSibling.disabled = false;
-          __log('Recording...');
-      }
-
-      function stopRecording(button) {
-          recorder && recorder.stop();
-          button.disabled = true;
-          button.previousElementSibling.disabled = false;
-          __log('Stopped recording.');
-
-          // create WAV download link using audio data blob
-          createDownloadLink();
-
-          recorder.clear();
-      }
-
-      function createDownloadLink() {
-          recorder && recorder.exportWAV(function(blob) {});
-      }
-
-      window.onload = function init() {
-          /*try {
-              // webkit shim
-              window.AudioContext = window.AudioContext || window.webkitAudioContext;
-              navigator.getUserMedia = ( navigator.getUserMedia ||
-                      navigator.webkitGetUserMedia ||
-                      navigator.mozGetUserMedia ||
-                      navigator.msGetUserMedia);
-              window.URL = window.URL || window.webkitURL;
-
-              audio_context = new AudioContext;
-              __log('Audio context set up.');
-              __log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
-          } catch (e) {
-              alert('No web audio support in this browser!');
-          }
-
-          navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
-              __log('No live audio input: ' + e);
-          });*/
-
-                };
-
-  </script>
-
-  <script>
-      function setupRecorder() {
-          Wami.setup({
-              id : "wami",
-              onReady : setupGUI
-          });
-      }
-
-      function setupGUI() {
-          var gui = new Wami.GUI({
-              id : "wami",
-              recordUrl : "https://wami-recorder.appspot.com/audio",
-              playUrl : "https://wami-recorder.appspot.com/audio"
-          });
-
-          gui.setPlayEnabled(false);
-      }
-  </script>
-
-
+                </div>
+              </div>
+       -->
+    </div>
 <% end %>

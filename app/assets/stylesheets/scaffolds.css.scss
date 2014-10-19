@@ -1,10 +1,10 @@
-body {
+/*body {
   background-color: #fff;
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
-}
+}*/
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
@@ -50,7 +50,7 @@ div {
   border: 2px solid red;
   padding: 7px;
   padding-bottom: 0;
-  margin-bottom: 20px;
+  //margin-bottom: 20px;
   background-color: #f0f0f0;
   h2 {
     text-align: left;
@@ -58,7 +58,7 @@ div {
     padding: 5px 5px 5px 15px;
     font-size: 12px;
     margin: -7px;
-    margin-bottom: 0px;
+    //margin-bottom: 0px;
     background-color: #c00;
     color: #fff;
   }
