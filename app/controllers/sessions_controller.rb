@@ -3,6 +3,13 @@ class SessionsController < ApplicationController
   end
 
   def create
+    #
+    # user = User.from_omniauth(request.env["omniauth.auth"])
+    # log_in user
+    # #params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+    # #session[:user_id] = user.id
+    # redirect_back_or root_url
+
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       if user.activated?
@@ -20,6 +27,7 @@ class SessionsController < ApplicationController
       flash.now[:danger] = 'Invalid email/password combination' # Not quite right!
       render 'new'
     end
+
   end
 
   def destroy

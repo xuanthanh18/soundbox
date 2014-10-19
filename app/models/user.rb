@@ -20,6 +20,17 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }
   has_secure_password
 
+
+  #facebook authentication
+  def self.from_omniauth(auth)
+    where(provider: auth[:provider], uid: auth[:uid]).first_or_create do |user|
+      user.provider = auth.provider
+      user.uid      = auth.uid
+      user.name     = auth.info.name
+      user.save
+    end
+  end
+
   # Sets the password reset attributes.
   def create_reset_digest
     self.reset_token = User.new_token

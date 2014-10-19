@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby   '2.0.0'
 
-gem 'rails',                   '4.1.5'
+gem 'rails',                   '4.1.4'
 gem 'bcrypt',                  '3.1.7'
 gem 'faker',                   '1.4.2'
 gem 'carrierwave',             '0.10.0'
@@ -17,7 +17,7 @@ gem 'jquery-rails',            '3.1.1'
 gem 'turbolinks',              '2.2.2'
 gem 'jbuilder',                '2.1.3'
 gem 'sdoc',                    '0.4.0', group: :doc
-gem 'omniauth-facebook',       '~> 1.4.1'
+gem 'omniauth-facebook',       '1.4.0'
 
 group :test do
   gem 'minitest-reporters', '1.0.5'

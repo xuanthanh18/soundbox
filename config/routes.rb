@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   delete 'logout'   => 'sessions#destroy'
   delete 'close'    => 'sessions#end_session' if Rails.env.test?
 
+  #facebook login
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/')
+
   resources :users do
     member do
       get :following, :followers
