@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   delete 'close'    => 'sessions#end_session' if Rails.env.test?
 
   #facebook login
-  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/:provider/callback', to: 'sessions#fb_create'
   get 'auth/failure', to: redirect('/')
 
   resources :users do
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :sessions,            only: [:new, :create, :destroy]
+  resources :sessions,            only: [:new, :create, :fb_create, :destroy]
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy]

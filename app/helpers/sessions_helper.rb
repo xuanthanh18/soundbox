@@ -2,6 +2,7 @@ module SessionsHelper
   # Logs in the given user.
   def log_in(user)
     session[:user_id] = user.id
+    logger.debug user.id
   end
 
   # Returns true if the given user is the current user.
@@ -52,6 +53,4 @@ module SessionsHelper
   def store_location
     session[:forwarding_url] = request.url if request.get?
   end
-
-
 end

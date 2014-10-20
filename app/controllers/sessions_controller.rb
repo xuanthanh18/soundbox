@@ -3,13 +3,6 @@ class SessionsController < ApplicationController
   end
 
   def create
-    #
-    # user = User.from_omniauth(request.env["omniauth.auth"])
-    # log_in user
-    # #params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-    # #session[:user_id] = user.id
-    # redirect_back_or root_url
-
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       if user.activated?
@@ -27,7 +20,20 @@ class SessionsController < ApplicationController
       flash.now[:danger] = 'Invalid email/password combination' # Not quite right!
       render 'new'
     end
+  end
 
+  def fb_create
+
+     user = User.from_omniauth(request.env["omniauth.auth"])
+     #if user is already in the database, log user in
+     puts "fb_create"
+     puts user
+     #else, create a new user in database then log user in
+
+     log_in user
+     #params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+     #session[:user_id] = user.id
+     redirect_back_or root_url
   end
 
   def destroy
